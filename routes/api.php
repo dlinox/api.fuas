@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Http\Request;
@@ -53,4 +54,10 @@ Route::group(['prefix' => 'users'], function () {
 Route::group(['prefix' => 'categories'], function () {
     Route::post('/load-data-table', [CategoryController::class, 'loadDataTable'])->middleware('auth:sanctum');
     Route::post('/save', [CategoryController::class, 'save'])->middleware('auth:sanctum');
+});
+
+//services
+Route::group(['prefix' => 'services'], function () {
+    Route::post('/load-data-table', [ServiceController::class, 'loadDataTable'])->middleware('auth:sanctum');
+    Route::post('/save', [ServiceController::class, 'save'])->middleware('auth:sanctum');
 });

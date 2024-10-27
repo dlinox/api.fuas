@@ -18,7 +18,8 @@ class CategoryController extends Controller
     public function loadDataTable(Request $request)
     {
         try {
-            $items = $this->category->dataTable($request, ['name', 'type']);
+            $items = $this->category->with('services')
+            ->dataTable($request, ['name', 'type']);
             return ApiResponse::success($items);
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 'Error al cargar datos de la tabla');
