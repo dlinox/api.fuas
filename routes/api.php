@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\UserController;
@@ -46,4 +47,10 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/load-select', [UserController::class, 'loadSelect'])->middleware('auth:sanctum');
     //allPermissions
     Route::get('/all-permissions', [UserController::class, 'allPermissions'])->middleware('auth:sanctum');
+});
+
+//categories
+Route::group(['prefix' => 'categories'], function () {
+    Route::post('/load-data-table', [CategoryController::class, 'loadDataTable'])->middleware('auth:sanctum');
+    Route::post('/save', [CategoryController::class, 'save'])->middleware('auth:sanctum');
 });
