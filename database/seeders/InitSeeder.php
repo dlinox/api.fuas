@@ -37,6 +37,17 @@ class InitSeeder extends Seeder
             'users.delete' => 'Eliminar usuarios',
             'users.assign-permissions' => 'Asignar permisos',
         ],
+        //categorias
+        'categories.categorias' => [
+            'categories.index' => 'Ver categorias',
+            'categories.create' => 'Crear categorias',
+            'categories.edit' => 'Editar categorias',
+            'categories.delete' => 'Eliminar categorias',
+            'categories.services.index' => 'Ver servicios',
+            'categories.services.create' => 'Crear servicios',
+            'categories.services.edit' => 'Editar servicios',
+            'categories.services.delete' => 'Eliminar servicios',
+        ],
     ];
 
 
@@ -92,10 +103,18 @@ class InitSeeder extends Seeder
                 'guard_name' => 'web',
                 'is_super' => true,
                 'redirect_route' => '/a'
-            ]
+            ],
+
         );
 
-
+        $roleUser = \Spatie\Permission\Models\Role::create(
+            [
+                'name' => 'user',
+                'guard_name' => 'web',
+                'is_super' => false,
+                'redirect_route' => '/a'
+            ],
+        );
 
         foreach ($this->postions as $position) {
             \App\Models\Position::create($position);

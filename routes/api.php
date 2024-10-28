@@ -48,6 +48,8 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/load-select', [UserController::class, 'loadSelect'])->middleware('auth:sanctum');
     //allPermissions
     Route::get('/all-permissions', [UserController::class, 'allPermissions'])->middleware('auth:sanctum');
+    //assignPermissions
+    Route::post('/assign-permissions', [UserController::class, 'assignPermissions'])->middleware('auth:sanctum');
 });
 
 //categories

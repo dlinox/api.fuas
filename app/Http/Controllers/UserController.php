@@ -60,7 +60,8 @@ class UserController extends Controller
                 return ApiResponse::success(null, 'Oficina actualizada con éxito');
             }
             $data['password'] = $request->password;
-            $this->user->create($data);
+            $user = $this->user->create($data);
+            $user->assignRole('user');
             return ApiResponse::success(null, 'Oficina creada con éxito', 201);
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 'Error al crear la oficina');
@@ -117,6 +118,18 @@ class UserController extends Controller
             return ApiResponse::success($permissions->toArray());
         } catch (\Exception $e) {
             return ApiResponse::error($e->getMessage(), 'Error al cargar los permisos');
+        }
+    }
+
+    //asiign permissions
+    public function assignPermissions(Request $request)
+    {
+        try {
+            $user = $this->user->find($request->userId);
+            $user->syncPermissions($request->permissions);
+            return ApiResponse::success(null, 'Permisos asignados con éxito');
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage(), 'Error al asignar permisos');
         }
     }
 }
