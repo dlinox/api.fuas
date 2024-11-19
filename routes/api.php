@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\AttentionController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CookieSessionsController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkerController;
+use App\Models\CookieSessions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -63,3 +67,6 @@ Route::group(['prefix' => 'services'], function () {
     Route::post('/load-data-table', [ServiceController::class, 'loadDataTable'])->middleware('auth:sanctum');
     Route::post('/save', [ServiceController::class, 'save'])->middleware('auth:sanctum');
 });
+
+
+Route::get('/sis/get-data/{sessionId}', [ AttentionController::class, 'getDataSIS' ])->middleware('auth:sanctum');
